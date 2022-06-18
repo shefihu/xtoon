@@ -27,7 +27,7 @@ const Features = () => {
               {" "}
               <motion.div
                 className="relative bg-red-300 w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                initial={{ x: "-100vw" }}
+                initial={{ x: "100vw" }}
                 animate={{ x: 0 }}
                 transition={{
                   // repeat: Infinity,
@@ -52,7 +52,7 @@ const Features = () => {
               </motion.div>
               <motion.div
                 className="relative bg-red-300  w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                initial={{ x: "-100vw" }}
+                initial={{ x: "100vw" }}
                 animate={{ x: 0 }}
                 transition={{
                   // repeat: Infinity,
