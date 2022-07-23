@@ -1,11 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import axios from "axios";
 const Features = () => {
   const { ref, inView } = useInView();
+  const [topAnime, setTopAnime] = useState([]);
+
+  const gettopAnime = async () => {
+    try {
+      const data = await axios.get(
+        "https://api.jikan.moe/v3/top/anime/1/bypopularity"
+      );
+      setTopAnime(data.data.top.slice(4, 8));
+    } catch (error) {}
+  };
   useEffect(() => {
-    console.log("view", inView);
-  }, [inView]);
+    gettopAnime();
+  }, []);
   return (
     <div>
       <div
@@ -24,108 +35,39 @@ const Features = () => {
         >
           {inView && (
             <>
-              {" "}
-              <motion.div
-                className="relative bg-red-300 w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                initial={{ x: "-100vw" }}
-                animate={{ x: 0 }}
-                transition={{
-                  // repeat: Infinity,
-                  type: "spring",
-                  duration: 2,
-                  bounce: 0.3,
-                }}
-              >
-                <img
-                  src="https://www.99images.com/download-image/939107/1080x1638"
-                  alt=""
-                  initial={{ x: "-100vw" }}
-                  animate={{ x: 0 }}
-                  transition={{
-                    // repeat: Infinity,
-                    type: "spring",
-                    duration: 2,
-                    bounce: 0.3,
-                  }}
-                  className="h-full w-full object-cover rounded-2xl"
-                />
-              </motion.div>
-              <motion.div
-                className="relative bg-red-300  w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                initial={{ x: "-100vw" }}
-                animate={{ x: 0 }}
-                transition={{
-                  // repeat: Infinity,
-                  type: "spring",
-                  duration: 2,
-                  bounce: 0.3,
-                }}
-              >
-                <img
-                  src="https://image.tmdb.org/t/p/original/yvyjAmpCbwbnGpWnGB8tvjDtpu0.jpg"
-                  alt=""
-                  className="h-full w-full object-cover rounded-2xl"
-                  initial={{ x: "-100vw" }}
-                  animate={{ x: 0 }}
-                  transition={{
-                    // repeat: Infinity,
-                    type: "spring",
-                    duration: 2,
-                    bounce: 0.3,
-                  }}
-                />
-              </motion.div>
-              <motion.div
-                className="relative bg-red-300 w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                initial={{ x: "-100vw" }}
-                animate={{ x: 0 }}
-                transition={{
-                  // repeat: Infinity,
-                  type: "spring",
-                  duration: 2.8,
-                  bounce: 0.3,
-                }}
-              >
-                {" "}
-                <img
-                  src="https://images5.alphacoders.com/105/thumb-1920-1055769.jpg"
-                  initial={{ x: "100vw" }}
-                  animate={{ x: 0 }}
-                  transition={{
-                    // repeat: Infinity,
-                    type: "spring",
-                    duration: 2.8,
-                    bounce: 0.3,
-                  }}
-                  alt=""
-                  className="h-full w-full object-cover rounded-2xl"
-                />
-              </motion.div>
-              <motion.div
-                className="relative bg-red-300 w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                initial={{ x: "-100vw" }}
-                animate={{ x: 0 }}
-                transition={{
-                  // repeat: Infinity,
-                  type: "spring",
-                  duration: 2.8,
-                  bounce: 0.3,
-                }}
-              >
-                <img
-                  src="https://wallpaperaccess.com/full/6092283.jpg"
-                  alt=""
-                  className="h-full w-full object-cover rounded-2xl"
-                  initial={{ x: "100vw" }}
-                  animate={{ x: 0 }}
-                  transition={{
-                    // repeat: Infinity,
-                    type: "spring",
-                    duration: 2.5,
-                    bounce: 0.3,
-                  }}
-                />
-              </motion.div>
+              {topAnime.map((anime, id) => {
+                return (
+                  <>
+                    {" "}
+                    <motion.div
+                      className="relative bg-red-300 w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
+                      initial={{ x: "-100vw" }}
+                      animate={{ x: 0 }}
+                      key={anime.id}
+                      transition={{
+                        // repeat: Infinity,
+                        type: "spring",
+                        duration: 3,
+                        bounce: 0.3,
+                      }}
+                    >
+                      <img
+                        src={anime.image_url}
+                        alt=""
+                        initial={{ x: "-100vw" }}
+                        animate={{ x: 0 }}
+                        transition={{
+                          // repeat: Infinity,
+                          type: "spring",
+                          duration: 2,
+                          bounce: 0.3,
+                        }}
+                        className="h-full w-full object-cover rounded-2xl"
+                      />
+                    </motion.div>
+                  </>
+                );
+              })}
             </>
           )}
         </div>
