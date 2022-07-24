@@ -41,7 +41,8 @@ const Features = () => {
                     {" "}
                     <motion.div
                       className="relative bg-red-300 w-40 lg:w-80 lg:h-96 h-40 rounded-2xl"
-                      initial={{ x: "-100vw" }}
+                      initial={{ translateX: -70, opacity: 0 }}
+                      whileInView={{ opacity: 1, translateX: 0 }}
                       animate={{ x: 0 }}
                       key={anime.id}
                       transition={{
@@ -50,12 +51,13 @@ const Features = () => {
                         duration: 3,
                         bounce: 0.3,
                       }}
+                      viewport={{ once: true }}
                     >
                       <img
                         src={anime.image_url}
                         alt=""
-                        initial={{ x: "-100vw" }}
-                        animate={{ x: 0 }}
+                        // initial={{ x: "-100vw" }}
+                        // animate={{ x: 0 }}
                         transition={{
                           // repeat: Infinity,
                           type: "spring",

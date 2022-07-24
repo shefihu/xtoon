@@ -44,8 +44,9 @@ const WHatweDO = () => {
                     <>
                       {" "}
                       <motion.div
-                        initial={{ x: "-100vw" }}
+                        initial={{ opacity: 0 }}
                         animate={{ x: 0 }}
+                        whileInView={{ opacity: 1 }}
                         transition={{
                           //   repeat: Infinity,
                           type: "spring",
